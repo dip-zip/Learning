@@ -1,0 +1,38 @@
+{
+  "AWSEBDockerVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "ravibsin/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "api",
+      "image": "ravibsin/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "ravibsin/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "ravibsin/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "client",
+        "server"
+      ]
+    }
+  ]
+}
